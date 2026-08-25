@@ -1,0 +1,213 @@
+/* ============================================================
+   Olive & Burgundy wedding site — replica build
+   Geometry system taken from the reference: every coordinate and
+   type size is a percentage of the PAGE WIDTH (cqw), so the whole
+   design scales fluidly exactly the way the Canva site does.
+   ============================================================ */
+
+:root{
+  /* ---- colour tokens, sampled off the reference ---- */
+  --olive:#4D502D;      /* rgb(77,80,45)  page-0 + home text          */
+  --wine:#50202C;       /* rgb(80,32,44)  RSVP / Kindly / buttons     */
+  --seal:#250F14;       /* rgb(37,15,20)  monogram + timeline text    */
+  --ink:#000000;        /* details headings + body copy               */
+  --paper:#FFFFFF;      /* page background — plain white              */
+  --onDark:#FFFFFF;
+
+  /* ---- type ---- */
+  --serif:"EB Garamond",Garamond,"Times New Roman",serif;
+  --script:"Pinyon Script",cursive;
+  --mono-script:"Italianno","Pinyon Script",cursive;
+  --sans:"Figtree","Helvetica Neue",Arial,sans-serif;
+}
+
+*{box-sizing:border-box}
+p,legend,fieldset{margin:0}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip;
+}
+
+/* ---------- page shell ---------- */
+.pg{
+  display:none;position:relative;width:100%;
+  container-type:inline-size;background:var(--paper);overflow:hidden;
+}
+.pg.on{display:block}
+
+/* page heights as measured on the reference (H / W x 100) */
+#p-envelope{min-height:100vh}
+#p-home   {height:225.5cqw}
+#p-details{height:371cqw}
+#p-story  {height:132cqw}
+#p-rsvp   {height:236cqw}
+
+/* ---------- the positioning primitive ----------
+   --x / --y / --w / --h / --s are all percent-of-page-width */
+.e{
+  position:absolute;
+  left:calc(var(--x,0) * 1cqw);
+  top:calc(var(--y,0) * 1cqw);
+  font-size:calc(var(--s,2) * 1cqw);
+  line-height:1.08;
+  margin:0;
+  white-space:pre;
+}
+.e.ctr{left:0;width:100%;text-align:center;white-space:normal}
+.szw{width:calc(var(--w) * 1cqw);font-size:0;line-height:0;white-space:normal}
+.e img{display:block;width:100%;height:auto}
+img.e{width:calc(var(--w) * 1cqw);height:auto}
+img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
+
+/* wrapped copy needs a measured column and normal wrapping */
+.copy{
+  white-space:normal;text-align:center;
+  width:calc(var(--w) * 1cqw);
+  line-height:calc(var(--lh,2.3) * 1cqw);
+}
+
+/* ---------- type roles ---------- */
+.f-serif {font-family:var(--serif);font-weight:400}
+.f-script{font-family:var(--script);font-weight:400;line-height:1.3}
+.f-mono  {font-family:var(--mono-script);font-weight:400}
+.f-sans  {font-family:var(--sans);font-weight:400}
+.up      {text-transform:uppercase;letter-spacing:.06em}
+.up-wide {text-transform:uppercase;letter-spacing:.18em}
+.b7      {font-weight:700}
+
+.c-olive{color:var(--olive)}
+.c-wine {color:var(--wine)}
+.c-seal {color:var(--seal)}
+.c-ink  {color:var(--ink)}
+.c-white{color:var(--onDark)}
+.circle>span{display:block}
+
+/* ---------- interaction: the reference's only animation ---------- */
+.tap{
+  cursor:pointer;text-decoration:none;display:block;
+  transition:transform .3s ease;transform-origin:center;
+}
+.tap:hover,.tap:focus-visible{transform:scale(1.05)}
+.tap:focus-visible{outline:2px solid var(--wine);outline-offset:4px}
+
+/* ---------- full-bleed painted bands ---------- */
+.band{
+  position:absolute;left:0;width:100%;
+  top:calc(var(--y) * 1cqw);height:calc(var(--h) * 1cqw);
+  overflow:hidden;
+}
+.band>img{width:100%;height:100%;object-fit:cover;display:block;position:absolute;inset:0}
+.band::after{content:"";position:absolute;inset:0;background:rgba(31,36,22,.34)}
+.band>*:not(img){position:absolute;z-index:2;margin:0;line-height:1}
+
+/* ---------- details-page pieces ---------- */
+.pill{
+  display:grid;place-content:center;text-align:center;white-space:normal;
+  width:calc(var(--w) * 1cqw);height:calc(var(--h) * 1cqw);
+  background:var(--wine);color:var(--onDark);border-radius:999px;
+  box-shadow:inset 0 0 0 calc(.18 * 1cqw) rgba(255,255,255,.35);
+}
+.swatch{
+  position:absolute;border-radius:50%;
+  left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--d) * 1cqw);height:calc(var(--d) * 1cqw);
+  background:var(--c);
+}
+.rule{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--w) * 1cqw);height:1px;background:var(--seal);opacity:.85;
+}
+.tick-v{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:1px;height:calc(var(--h,1.2) * 1cqw);background:var(--seal);opacity:.85;
+}
+.iconbox{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--w) * 1cqw);height:calc(var(--h) * 1cqw);
+  display:flex;align-items:flex-end;justify-content:center;
+}
+.iconbox img{max-height:100%;max-width:100%;width:auto;display:block}
+.circle{
+  display:grid;place-content:center;text-align:center;white-space:normal;
+  width:calc(var(--d) * 1cqw);height:calc(var(--d) * 1cqw);
+  border-radius:50%;background:var(--wine);color:var(--onDark);
+}
+
+/* ---------- countdown ---------- */
+.clock{display:flex;gap:calc(2.4 * 1cqw);justify-content:center}
+.clock div{text-align:center;min-width:calc(6 * 1cqw)}
+.clock b{
+  display:block;font-family:var(--serif);font-weight:400;
+  font-size:calc(3.4 * 1cqw);line-height:1;font-variant-numeric:tabular-nums;
+}
+.clock span{
+  display:block;margin-top:.8em;font-family:var(--sans);
+  font-size:calc(.8 * 1cqw);letter-spacing:.24em;text-transform:uppercase;opacity:.92;
+}
+
+/* ---------- RSVP form (mirrors Canva's native form element) ---------- */
+.form{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--w) * 1cqw);display:grid;gap:calc(2.4 * 1cqw);
+}
+.form fieldset{border:0;padding:0;margin:0;min-width:0}
+.form .q{
+  display:block;font-family:var(--serif);color:var(--wine);
+  font-size:calc(1.55 * 1cqw);margin-bottom:calc(.8 * 1cqw);padding:0;
+}
+.form .q.dark{color:var(--seal)}
+.form input[type=text],.form textarea{
+  width:100%;font-family:var(--serif);font-size:calc(1.5 * 1cqw);
+  color:var(--seal);background:#fff;border:1px solid rgba(37,15,20,.45);
+  border-radius:calc(.5 * 1cqw);padding:calc(1.1 * 1cqw) calc(1.2 * 1cqw);outline:none;
+}
+.form input[type=text]:focus,.form textarea:focus{border-color:var(--wine)}
+.form textarea{resize:vertical;min-height:calc(7 * 1cqw)}
+.opt{
+  display:flex;align-items:center;gap:calc(1 * 1cqw);cursor:pointer;
+  background:#F2EAEA;border-radius:calc(.5 * 1cqw);
+  padding:calc(1.1 * 1cqw) calc(1.4 * 1cqw);margin-bottom:calc(.9 * 1cqw);
+  font-family:var(--serif);font-size:calc(1.5 * 1cqw);color:var(--seal);
+}
+.opt input{
+  appearance:none;flex:none;width:calc(1.3 * 1cqw);height:calc(1.3 * 1cqw);
+  border:1px solid var(--wine);border-radius:50%;display:grid;place-content:center;
+}
+.opt input::after{
+  content:"";width:calc(.7 * 1cqw);height:calc(.7 * 1cqw);border-radius:50%;
+  background:var(--wine);transform:scale(0);transition:transform .2s ease;
+}
+.opt input:checked::after{transform:scale(1)}
+.submit{
+  justify-self:center;border:0;cursor:pointer;
+  font-family:var(--serif);text-transform:uppercase;letter-spacing:.16em;
+  font-size:calc(1.5 * 1cqw);color:#fff;background:var(--wine);
+  border-radius:999px;padding:calc(1.2 * 1cqw) calc(4 * 1cqw);
+  transition:transform .3s ease;
+}
+.submit:hover{transform:scale(1.05)}
+.submit:disabled{opacity:.5;cursor:default;transform:none}
+.formnote{
+  text-align:center;font-family:var(--serif);
+  font-size:calc(1.5 * 1cqw);color:var(--wine);min-height:calc(2 * 1cqw);
+}
+
+/* ---------- photo placeholders ---------- */
+.frame{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--w) * 1cqw);
+  padding:calc(.7 * 1cqw) calc(.7 * 1cqw) calc(3.2 * 1cqw);
+  background:#FBF8F0;box-shadow:0 calc(.7 * 1cqw) calc(1.6 * 1cqw) rgba(46,52,35,.22);
+  transform:rotate(var(--r,0deg));
+}
+.frame .ph{
+  display:block;width:100%;height:calc(var(--ph) * 1cqw);
+  background:linear-gradient(135deg,#EFEBE0,#DCD8C9 55%,#C6C3B2);
+}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important}
+  .tap:hover{transform:none}
+}
