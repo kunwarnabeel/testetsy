@@ -39,7 +39,7 @@ body{
 /* page heights as measured on the reference (H / W x 100) */
 #p-envelope{min-height:100vh}
 #p-home   {height:225.5cqw}
-#p-details{height:371cqw}
+#p-details{height:378cqw}
 #p-story  {height:132cqw}
 #p-rsvp   {height:236cqw}
 
@@ -203,7 +203,7 @@ img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
 }
 .frame .ph{
   display:block;width:100%;height:calc(var(--ph) * 1cqw);
-  background:linear-gradient(135deg,#EFEBE0,#DCD8C9 55%,#C6C3B2);
+  background:#DDD9CA;
 }
 
 @media (prefers-reduced-motion:reduce){
