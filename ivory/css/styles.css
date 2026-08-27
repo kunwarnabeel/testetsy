@@ -1,0 +1,148 @@
+/* ============================================================
+   Ivory Wedding Invitation — replica
+   Same geometry system as before: every coordinate and type size
+   is a percentage of PAGE WIDTH (cqw). Design width 800px.
+   ============================================================ */
+
+:root{
+  --ink:#000000;
+  --gold:#AF936A;
+  --cream:#FBF5EB;
+  --white:#FFFFFF;
+  --rule:#C9B48F;
+
+  /* Google-Fonts stand-ins; swap for the real faces inside Canva */
+  --smallcaps:"Cinzel",Georgia,serif;      /* tracked small-caps labels */
+  --didone:"Italiana",Georgia,serif;        /* VENUE / DETAILS / DAY    */
+  --serif:"Playfair Display",Georgia,serif; /* times, headings, body    */
+  --display:"Cormorant Garamond",Georgia,serif; /* Emma · James · 22   */
+  --hand:"Caveat",cursive;                  /* and · we can't wait     */
+  --hand2:"Sacramento",cursive;             /* We Do                   */
+  --script:"Pinyon Script",cursive;         /* play music · the        */
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:clip}
+body{
+  margin:0;color:var(--ink);font-family:var(--serif);
+  -webkit-font-smoothing:antialiased;overflow-x:clip;
+  /* the page outside the phone column */
+  background:#EFEAE1 url("../assets/bg-floral.jpg") center/cover fixed no-repeat;
+}
+
+/* ---------- the mobile column the whole design lives in ---------- */
+.shell{
+  width:100%;max-width:var(--col,480px);margin:0 auto;
+  background:var(--white);
+  box-shadow:0 0 60px rgba(60,50,35,.18);
+  min-height:100vh;
+}
+
+/* ---------- page shell ---------- */
+.pg{display:none;position:relative;width:100%;container-type:inline-size;
+    background:var(--white);overflow:hidden}
+.pg.on{display:block}
+
+#p-landing{height:208.3cqw}
+#s0{height:148.3cqw}
+#s1{height:39.7cqw}
+#s2{height:155.8cqw}
+#s3{height:170.1cqw}
+#s4{height:162.7cqw}
+#s5{height:199.4cqw}
+#s6{height:303.6cqw}
+#s7{height:170.6cqw}
+
+/* ---------- positioning primitive ---------- */
+.e{position:absolute;
+   left:calc(var(--x,0) * 1cqw);
+   top:calc(var(--y,0) * 1cqw);
+   font-size:calc(var(--s,3) * 1cqw);
+   line-height:1.15;margin:0;white-space:pre}
+.e.ctr{left:0;width:100%;text-align:center;white-space:normal}
+.e.box{width:calc(var(--w) * 1cqw);white-space:normal}
+img.e{width:calc(var(--w) * 1cqw);height:auto}
+img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
+.e img{display:block;width:100%;height:auto}
+.szw{width:calc(var(--w) * 1cqw);font-size:0;line-height:0;white-space:normal}
+
+/* full-bleed cover image */
+.cover{position:absolute;left:0;width:100%;
+       top:calc(var(--y,0) * 1cqw);height:calc(var(--h) * 1cqw);overflow:hidden}
+.cover>img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* ---------- type roles ---------- */
+.f-sc  {font-family:var(--smallcaps);font-weight:400;text-transform:uppercase}
+.f-did {font-family:var(--didone);font-weight:400;text-transform:uppercase}
+.f-serif{font-family:var(--serif);font-weight:400}
+.f-disp{font-family:var(--display);font-weight:500}
+.f-hand{font-family:var(--hand);font-weight:400}
+.f-hand2{font-family:var(--hand2);font-weight:400}
+.f-scr {font-family:var(--script);font-weight:400}
+
+.c-ink{color:var(--ink)}
+.c-gold{color:var(--gold)}
+.c-cream{color:var(--cream)}
+.c-white{color:var(--white)}
+
+.tk1{letter-spacing:.10em}
+.tk2{letter-spacing:.16em}
+.tk3{letter-spacing:.30em}
+
+/* ---------- interaction ---------- */
+.tap{cursor:pointer;text-decoration:none;display:block;
+     transition:transform .3s ease;transform-origin:center}
+.tap:hover,.tap:focus-visible{transform:scale(1.05)}
+.tap:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+
+/* ---------- gold pill button ---------- */
+.pill{
+  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  width:calc(var(--w) * 1cqw);height:calc(var(--h) * 1cqw);
+  display:grid;place-content:center;text-align:center;border-radius:999px;
+  background:linear-gradient(180deg,#E4D2AE 0%,#C6A876 45%,#A98A57 100%);
+  color:#3A2E1C;font-family:var(--smallcaps);text-transform:uppercase;
+  font-size:calc(var(--s,2.6) * 1cqw);letter-spacing:.18em;
+  border:1px solid #8E7548;text-decoration:none;
+  transition:transform .3s ease;
+}
+.pill:hover{transform:scale(1.05)}
+
+/* ---------- timeline ---------- */
+.tl-line{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+         width:1px;height:calc(var(--h) * 1cqw);background:#8C8C8C}
+.tl-dot{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+        width:calc(var(--d,2) * 1cqw);height:calc(var(--d,2) * 1cqw);
+        border-radius:50%;background:var(--gold)}
+.tl-rule{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+         width:calc(var(--w) * 1cqw);height:1px;background:#B9B9B9}
+.ico{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+     width:calc(var(--w) * 1cqw);height:auto;display:block}
+
+/* ---------- countdown ---------- */
+.clock{position:absolute;left:0;width:100%;top:calc(var(--y) * 1cqw);
+       display:flex;justify-content:center;align-items:baseline;gap:calc(1.6 * 1cqw)}
+.clock b{font-family:var(--serif);font-weight:400;font-size:calc(9 * 1cqw);
+         line-height:1;font-variant-numeric:tabular-nums}
+.clock i{font-style:normal;font-family:var(--serif);font-size:calc(9 * 1cqw);
+         color:#C9C9C9;line-height:1}
+.clock .u{position:absolute;top:calc(10.5 * 1cqw);left:0;width:100%;
+          display:flex;justify-content:center;gap:calc(1.6 * 1cqw)}
+.clock .u span{font-family:var(--smallcaps);font-size:calc(1.5 * 1cqw);
+               letter-spacing:.2em;color:#6E6E6E;width:calc(9 * 1cqw);text-align:center}
+
+/* ---------- bullets ---------- */
+.bul{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+     width:calc(var(--w) * 1cqw);margin:0;padding:0 0 0 calc(2 * 1cqw);
+     font-family:var(--smallcaps);font-size:calc(var(--s,2.4) * 1cqw);
+     letter-spacing:.06em;line-height:calc(var(--lh,3.6) * 1cqw);text-transform:uppercase}
+.bul li{margin:0}
+
+.copy{white-space:normal;text-align:center;width:calc(var(--w) * 1cqw);
+      line-height:calc(var(--lh,3.4) * 1cqw)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{transition-duration:.01ms !important}
+  .tap:hover,.pill:hover{transform:none}
+}
