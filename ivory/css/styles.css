@@ -135,7 +135,7 @@ img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
 .bul{word-spacing:.12em;position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
      width:calc(var(--w) * 1cqw);margin:0;padding:0 0 0 calc(2 * 1cqw);
      font-family:var(--smallcaps);font-size:calc(var(--s,2.4) * 1cqw);
-     letter-spacing:.06em;line-height:calc(var(--lh,3.6) * 1cqw);text-transform:uppercase}
+     line-height:calc(var(--lh,3.6) * 1cqw);text-transform:uppercase}
 .bul li{margin:0;white-space:pre}
 
 .copy{white-space:pre;text-align:center;width:auto;
