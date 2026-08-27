@@ -58,7 +58,7 @@ body{
    left:calc(var(--x,0) * 1cqw);
    top:calc(var(--y,0) * 1cqw);
    font-size:calc(var(--s,3) * 1cqw);
-   line-height:1.15;margin:0;white-space:pre}
+   line-height:1.15;margin:0;white-space:pre;word-spacing:.12em}
 .e.ctr{left:0;width:100%;text-align:center;white-space:pre}
 .e.box{width:calc(var(--w) * 1cqw);white-space:pre}
 img.e{width:calc(var(--w) * 1cqw);height:auto}
@@ -97,7 +97,7 @@ img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
 
 /* ---------- gold pill button ---------- */
 .pill{
-  position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+  word-spacing:.12em;position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
   width:calc(var(--w) * 1cqw);height:calc(var(--h) * 1cqw);
   display:grid;place-content:center;text-align:center;border-radius:999px;
   background:linear-gradient(180deg,#E4D2AE 0%,#C6A876 45%,#A98A57 100%);
@@ -132,7 +132,7 @@ img.e.fit{height:calc(var(--h) * 1cqw);object-fit:cover}
                letter-spacing:.2em;color:#6E6E6E;width:calc(9 * 1cqw);text-align:center}
 
 /* ---------- bullets ---------- */
-.bul{position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
+.bul{word-spacing:.12em;position:absolute;left:calc(var(--x) * 1cqw);top:calc(var(--y) * 1cqw);
      width:calc(var(--w) * 1cqw);margin:0;padding:0 0 0 calc(2 * 1cqw);
      font-family:var(--smallcaps);font-size:calc(var(--s,2.4) * 1cqw);
      letter-spacing:.06em;line-height:calc(var(--lh,3.6) * 1cqw);text-transform:uppercase}
