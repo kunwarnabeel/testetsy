@@ -43,6 +43,11 @@ body{
     background:var(--white);overflow:hidden}
 .pg.on{display:block}
 
+/* the invitation is ONE long scrolling page holding every section */
+#invitation{display:none}
+#invitation.on{display:block}
+#invitation .pg{display:block}
+
 #p-landing{height:208.3cqw}
 #s0{height:148.3cqw}
 #s1{height:39.7cqw}
